@@ -216,7 +216,11 @@ void initialize_display()
     const esp_lcd_panel_dev_config_t lcd_config = 
     {
         .reset_gpio_num = TFT_RESET,
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(6, 0, 0)
         .color_space = TFT_COLOR_MODE,
+#else
+        .rgb_ele_order = TFT_COLOR_MODE,
+#endif
         .bits_per_pixel = 18,
         .flags =
         {
