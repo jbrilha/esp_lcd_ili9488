@@ -56,7 +56,12 @@ static const gpio_num_t TFT_BACKLIGHT = GPIO_NUM_18;
 #else
 #error Unsure which GPIO to use for SPI/TFT, please update code accordingly.
 #endif
+
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 3, 0)
+static const lcd_rgb_element_order_t TFT_COLOR_MODE = LCD_RGB_ELEMENT_ORDER_BGR;
+#else
 static const lcd_rgb_element_order_t TFT_COLOR_MODE = COLOR_RGB_ELEMENT_ORDER_BGR;
+#endif
 
 // Default to 25 lines of color data
 static const size_t LV_BUFFER_SIZE = DISPLAY_HORIZONTAL_PIXELS * 25;
